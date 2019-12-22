@@ -6,6 +6,7 @@
 
     <ItemGroup>
         <Compile Include="BaseTokens.fs" />
+        <Compile Include="TokenGroups.fs" />
     </ItemGroup>
 
 </Project>

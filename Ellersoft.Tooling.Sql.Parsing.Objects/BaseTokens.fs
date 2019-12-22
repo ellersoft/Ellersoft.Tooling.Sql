@@ -15,16 +15,3 @@ type BaseToken =
     | Number of Number
     | Grouping of OpenCloseGrouping
     | Symbol of char
-    
-type TokenGroup =
-    | String of BaseToken []
-    | Separation of BaseToken []
-    | Group of OpenCloseGrouping
-    | Other of BaseToken []
-    
-type StructuredTokenGroup =
-    | String of BaseToken []
-    | Separation of BaseToken []
-    | Group of Grouping * StructuredTokenGroup []
-    | Other of BaseToken []
-    
