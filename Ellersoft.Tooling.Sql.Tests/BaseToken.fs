@@ -1,7 +1,7 @@
 module BaseToken
 
-open Ellersoft.Sql.Parsing
-open Ellersoft.Sql.Parsing.Objects
+open Ellersoft.Tooling.Sql.Parsing
+open Ellersoft.Tooling.Sql.Parsing.Objects
 open Xunit
 
 [<Fact>]

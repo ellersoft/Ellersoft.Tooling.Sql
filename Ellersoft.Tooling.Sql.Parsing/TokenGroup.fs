@@ -1,4 +1,4 @@
-namespace Ellersoft.Sql.Parsing
+namespace Ellersoft.Tooling.Sql.Parsing
 
 open Ellersoft.Tooling.Sql.Parsing.Objects
 
@@ -25,32 +25,17 @@ module TokenGroup =
             match remGroups with
             | [|  |] -> [| |], stackedGroups
             | groups ->
+                let recurse = Array.append stackedGroups >> mapGroups search groups.[1..]
                 match groups.[0] with
-                | TokenGroup.String s ->
-                    [| StructuredTokenGroup.String s |]
-                    |> Array.append stackedGroups
-                    |> mapGroups search groups.[1..]
-                | TokenGroup.Separation s ->
-                    [| StructuredTokenGroup.Separation s |]
-                    |> Array.append stackedGroups
-                    |> mapGroups search groups.[1..]
-                | TokenGroup.Other s ->
-                    [| StructuredTokenGroup.Other s |]
-                    |> Array.append stackedGroups
-                    |> mapGroups search groups.[1..]
+                | TokenGroup.String s -> [| StructuredTokenGroup.String s |] |> recurse
+                | TokenGroup.Separation s -> [| StructuredTokenGroup.Separation s |] |> recurse
+                | TokenGroup.Other s -> [| StructuredTokenGroup.Other s |] |> recurse
                 | TokenGroup.Group (Close g) ->
                     match search with
                     | Some s ->
-                        if g = s then
-                            groups.[1..], stackedGroups
-                        else
-                            [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |]
-                            |> Array.append stackedGroups
-                            |> mapGroups search groups.[1..]
-                    | _ -> 
-                        [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |]
-                        |> Array.append stackedGroups
-                        |> mapGroups search groups.[1..]
+                        if g = s then groups.[1..], stackedGroups
+                        else [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |] |> recurse
+                    | _ ->  [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |] |> recurse
                 | TokenGroup.Group (Open g) ->
                     let rem, groups = mapGroups (Some g) groups.[1..] [|  |]
                     [| StructuredTokenGroup.Group (g, groups) |]
