@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ellersoft.Tooling.Sql.Parsing", "Ellersoft.Tooling.Sql.Parsing\Ellersoft.Tooling.Sql.Parsing.fsproj", "{2EA248E3-0364-4D3E-AC6E-BCFC58BF1E46}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ellersoft.Tooling.Sql.Tests", "Ellersoft.Tooling.Sql.Tests\Ellersoft.Tooling.Sql.Tests.fsproj", "{03A82D3C-2FEA-49AC-A875-52A671A0FEE0}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ellersoft.Tooling.Sql.Parsing.Objects", "Ellersoft.Tooling.Sql.Parsing.Objects\Ellersoft.Tooling.Sql.Parsing.Objects.fsproj", "{8346BA70-DF2B-462C-9D0B-EDBA13C2AEC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F085E5D-5174-4428-A761-5955C9500A6D}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EA248E3-0364-4D3E-AC6E-BCFC58BF1E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EA248E3-0364-4D3E-AC6E-BCFC58BF1E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EA248E3-0364-4D3E-AC6E-BCFC58BF1E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EA248E3-0364-4D3E-AC6E-BCFC58BF1E46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A82D3C-2FEA-49AC-A875-52A671A0FEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A82D3C-2FEA-49AC-A875-52A671A0FEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A82D3C-2FEA-49AC-A875-52A671A0FEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A82D3C-2FEA-49AC-A875-52A671A0FEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8346BA70-DF2B-462C-9D0B-EDBA13C2AEC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8346BA70-DF2B-462C-9D0B-EDBA13C2AEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8346BA70-DF2B-462C-9D0B-EDBA13C2AEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8346BA70-DF2B-462C-9D0B-EDBA13C2AEC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

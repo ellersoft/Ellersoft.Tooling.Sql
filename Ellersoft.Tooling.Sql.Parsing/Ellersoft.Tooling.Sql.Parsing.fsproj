@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <RootNamespace>Ellersoft.Sql.Parsing</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="BaseToken.fs" />
+        <Compile Include="TokenGroup.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ellersoft.Tooling.Sql.Parsing.Objects\Ellersoft.Tooling.Sql.Parsing.Objects.fsproj" />
+    </ItemGroup>
+
+</Project>
