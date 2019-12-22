@@ -20,6 +20,10 @@ let ``Tokenize simple CREATE TABLE script into base character tokens`` () =
         BaseToken.Letter (Upper LL)
         BaseToken.Letter (Upper LE)
         BaseToken.Separator Whitespace
+        BaseToken.Letter (Lower LD)
+        BaseToken.Letter (Lower LB)
+        BaseToken.Letter (Lower LO)
+        BaseToken.Separator Period
         BaseToken.Letter (Upper LT)
         BaseToken.Letter (Lower LE)
         BaseToken.Letter (Lower LS)
@@ -95,7 +99,7 @@ let ``Tokenize simple CREATE TABLE script into base character tokens`` () =
         BaseToken.Grouping (Close Parenthesis)
         BaseToken.Grouping (Close Parenthesis)    
     |]
-    let input = "CREATE TABLE Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
+    let input = "CREATE TABLE dbo.Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
     let actual = input |> BaseToken.classify :> BaseToken seq
     Assert.Equal(expected, actual)
 
@@ -115,6 +119,10 @@ let ``Tokenize and group simple CREATE TABLE script`` () =
            BaseToken.Letter (Upper LL)
            BaseToken.Letter (Upper LE) |]
         [| BaseToken.Separator Whitespace |]
+        [| BaseToken.Letter (Lower LD)
+           BaseToken.Letter (Lower LB)
+           BaseToken.Letter (Lower LO) |]
+        [| BaseToken.Separator Period |]
         [| BaseToken.Letter (Upper LT)
            BaseToken.Letter (Lower LE)
            BaseToken.Letter (Lower LS)
@@ -190,7 +198,7 @@ let ``Tokenize and group simple CREATE TABLE script`` () =
         [| BaseToken.Grouping (Close Parenthesis) |]
         [| BaseToken.Grouping (Close Parenthesis) |]    
     |]
-    let input = "CREATE TABLE Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
+    let input = "CREATE TABLE dbo.Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
     let actual = input |> BaseToken.classify |> BaseToken.group :> BaseToken [] seq
     Assert.Equal(expected, actual)
 

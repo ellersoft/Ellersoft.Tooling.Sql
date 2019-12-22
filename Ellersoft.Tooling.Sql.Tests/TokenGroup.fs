@@ -23,6 +23,11 @@ let ``Tokenize and label groups for simple CREATE TABLE script`` () =
             BaseToken.Letter (Upper LE) |])
         TokenGroup.Separation [| BaseToken.Separator Whitespace |]
         TokenGroup.String ([|
+           BaseToken.Letter (Lower LD)
+           BaseToken.Letter (Lower LB)
+           BaseToken.Letter (Lower LO) |])
+        TokenGroup.Separation [| BaseToken.Separator Period |]
+        TokenGroup.String ([|
             BaseToken.Letter (Upper LT)
             BaseToken.Letter (Lower LE)
             BaseToken.Letter (Lower LS)
@@ -110,7 +115,7 @@ let ``Tokenize and label groups for simple CREATE TABLE script`` () =
         TokenGroup.Group (Close Parenthesis)
         TokenGroup.Group (Close Parenthesis)    
     |]
-    let input = "CREATE TABLE Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
+    let input = "CREATE TABLE dbo.Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
     let actual = input |> BaseToken.classify |> BaseToken.group |> TokenGroup.classify :> TokenGroup seq
     Assert.Equal(expected, actual)
 
@@ -132,6 +137,11 @@ let ``Tokenize and structure groups for simple CREATE TABLE script`` () =
             BaseToken.Letter (Upper LL)
             BaseToken.Letter (Upper LE) |])
         StructuredTokenGroup.Separation [| BaseToken.Separator Whitespace |]
+        StructuredTokenGroup.String ([|
+           BaseToken.Letter (Lower LD)
+           BaseToken.Letter (Lower LB)
+           BaseToken.Letter (Lower LO) |])
+        StructuredTokenGroup.Separation [| BaseToken.Separator Period |]
         StructuredTokenGroup.String ([|
             BaseToken.Letter (Upper LT)
             BaseToken.Letter (Lower LE)
@@ -220,6 +230,6 @@ let ``Tokenize and structure groups for simple CREATE TABLE script`` () =
             |])
         |])
     |]
-    let input = "CREATE TABLE Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
+    let input = "CREATE TABLE dbo.Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
     let actual = input |> BaseToken.classify |> BaseToken.group |> TokenGroup.classify |> TokenGroup.group :> StructuredTokenGroup seq
     Assert.Equal(expected, actual)
