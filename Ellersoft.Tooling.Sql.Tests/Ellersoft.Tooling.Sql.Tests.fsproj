@@ -8,8 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="BaseToken.fs" />
-        <Compile Include="TokenGroup.fs" />
+        <Compile Include="BaseToken\Classify.fs" />
+        <Compile Include="BaseToken\Group.fs" />
+        <Compile Include="TokenGroup\Classify.fs" />
+        <Compile Include="TokenGroup\Group.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
