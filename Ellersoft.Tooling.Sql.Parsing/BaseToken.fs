@@ -1,6 +1,6 @@
-﻿namespace Ellersoft.Sql.Parsing
+﻿namespace Ellersoft.Tooling.Sql.Parsing
 
-open Ellersoft.Sql.Parsing.Objects
+open Ellersoft.Tooling.Sql.Parsing.Objects
 
 module BaseToken =
     let classify (input : string) =

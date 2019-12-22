@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.2</TargetFramework>
-        <RootNamespace>Ellersoft.Sql.Parsing.Objects</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

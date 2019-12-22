@@ -1,6 +1,6 @@
 namespace Ellersoft.Sql.Parsing
 
-open Ellersoft.Sql.Parsing.Objects
+open Ellersoft.Tooling.Sql.Parsing.Objects
 
 module TokenGroup =
     let classify (groups : BaseToken [] []) =

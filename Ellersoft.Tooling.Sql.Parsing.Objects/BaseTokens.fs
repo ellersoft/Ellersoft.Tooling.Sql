@@ -1,4 +1,4 @@
-﻿namespace Ellersoft.Sql.Parsing.Objects
+﻿namespace Ellersoft.Tooling.Sql.Parsing.Objects
 
 type Letter = | LA | LB | LC | LD | LE | LF | LG | LH | LI | LJ | LK | LL | LM | LN | LO | LP | LQ | LR | LS | LT | LU | LV | LW | LX | LY | LZ    
 type CasedLetter = | Upper of Letter | Lower of Letter
