@@ -20,18 +20,24 @@ let ``Classify and group simple CREATE TABLE script`` () =
            BaseToken.Letter (Upper LL)
            BaseToken.Letter (Upper LE) |]
         [| BaseToken.Separator Whitespace |]
+        [| BaseToken.Grouping (Open Bracket) |]
         [| BaseToken.Letter (Lower LD)
            BaseToken.Letter (Lower LB)
            BaseToken.Letter (Lower LO) |]
+        [| BaseToken.Grouping (Close Bracket) |]
         [| BaseToken.Separator Period |]
+        [| BaseToken.Grouping (Open Bracket) |]
         [| BaseToken.Letter (Upper LT)
            BaseToken.Letter (Lower LE)
            BaseToken.Letter (Lower LS)
            BaseToken.Letter (Lower LT) |]
+        [| BaseToken.Grouping (Close Bracket) |]
         [| BaseToken.Separator Whitespace |]
         [| BaseToken.Grouping (Open Parenthesis) |]
+        [| BaseToken.Grouping (Open Bracket) |]
         [| BaseToken.Letter (Upper LI)
            BaseToken.Letter (Lower LD) |]
+        [| BaseToken.Grouping (Close Bracket) |]
         [| BaseToken.Separator Whitespace |]
         [| BaseToken.Letter (Upper LI)
            BaseToken.Letter (Upper LN)
@@ -73,6 +79,7 @@ let ``Classify and group simple CREATE TABLE script`` () =
            BaseToken.Letter (Upper LN)
            BaseToken.Letter (Upper LT) |]
         [| BaseToken.Separator Whitespace |]
+        [| BaseToken.Grouping (Open Bracket) |]
         [| BaseToken.Letter (Upper LP)
            BaseToken.Letter (Upper LK)
            BaseToken.Symbol '_'
@@ -80,6 +87,7 @@ let ``Classify and group simple CREATE TABLE script`` () =
            BaseToken.Letter (Lower LE)
            BaseToken.Letter (Lower LS)
            BaseToken.Letter (Lower LT) |]
+        [| BaseToken.Grouping (Close Bracket) |]
         [| BaseToken.Separator Whitespace |]
         [| BaseToken.Letter (Upper LP)
            BaseToken.Letter (Upper LR)
@@ -94,11 +102,13 @@ let ``Classify and group simple CREATE TABLE script`` () =
            BaseToken.Letter (Upper LY) |]
         [| BaseToken.Separator Whitespace |]
         [| BaseToken.Grouping (Open Parenthesis) |]
+        [| BaseToken.Grouping (Open Bracket) |]
         [| BaseToken.Letter (Upper LI)
            BaseToken.Letter (Lower LD) |]
+        [| BaseToken.Grouping (Close Bracket) |]
         [| BaseToken.Grouping (Close Parenthesis) |]
         [| BaseToken.Grouping (Close Parenthesis) |]    
     |]
-    let input = "CREATE TABLE dbo.Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
+    let input = "CREATE TABLE [dbo].[Test] ([Id] INT NOT NULL IDENTITY(1, 1), CONSTRAINT [PK_Test] PRIMARY KEY ([Id]))"
     let actual = input |> BaseToken.classify |> BaseToken.group :> BaseToken [] seq
     Assert.Equal(expected, actual)

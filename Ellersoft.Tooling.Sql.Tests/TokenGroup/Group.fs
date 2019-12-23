@@ -22,21 +22,27 @@ let ``Classify and group structures for simple CREATE TABLE script`` () =
             BaseToken.Letter (Upper LL)
             BaseToken.Letter (Upper LE) |])
         StructuredTokenGroup.Separation [| BaseToken.Separator Whitespace |]
-        StructuredTokenGroup.String ([|
-           BaseToken.Letter (Lower LD)
-           BaseToken.Letter (Lower LB)
-           BaseToken.Letter (Lower LO) |])
+        StructuredTokenGroup.Group (Bracket, [|
+            StructuredTokenGroup.String ([|
+               BaseToken.Letter (Lower LD)
+               BaseToken.Letter (Lower LB)
+               BaseToken.Letter (Lower LO) |])
+        |])
         StructuredTokenGroup.Separation [| BaseToken.Separator Period |]
-        StructuredTokenGroup.String ([|
-            BaseToken.Letter (Upper LT)
-            BaseToken.Letter (Lower LE)
-            BaseToken.Letter (Lower LS)
-            BaseToken.Letter (Lower LT) |])
+        StructuredTokenGroup.Group (Bracket, [|
+            StructuredTokenGroup.String ([|
+                BaseToken.Letter (Upper LT)
+                BaseToken.Letter (Lower LE)
+                BaseToken.Letter (Lower LS)
+                BaseToken.Letter (Lower LT) |])
+        |])
         StructuredTokenGroup.Separation [| BaseToken.Separator Whitespace |]
         StructuredTokenGroup.Group (Parenthesis, [|
-            StructuredTokenGroup.String ([|
-                BaseToken.Letter (Upper LI)
-                BaseToken.Letter (Lower LD) |])
+            StructuredTokenGroup.Group (Bracket, [|
+                StructuredTokenGroup.String ([|
+                    BaseToken.Letter (Upper LI)
+                    BaseToken.Letter (Lower LD) |])
+            |])
             StructuredTokenGroup.Separation [| BaseToken.Separator Whitespace |]
             StructuredTokenGroup.String ([|
                 BaseToken.Letter (Upper LI)
@@ -85,14 +91,16 @@ let ``Classify and group structures for simple CREATE TABLE script`` () =
                 BaseToken.Letter (Upper LN)
                 BaseToken.Letter (Upper LT) |])
             StructuredTokenGroup.Separation [| BaseToken.Separator Whitespace |]
-            StructuredTokenGroup.String ([|
-                BaseToken.Letter (Upper LP)
-                BaseToken.Letter (Upper LK)
-                BaseToken.Symbol '_'
-                BaseToken.Letter (Upper LT)
-                BaseToken.Letter (Lower LE)
-                BaseToken.Letter (Lower LS)
-                BaseToken.Letter (Lower LT) |])
+            StructuredTokenGroup.Group (Bracket, [|
+                StructuredTokenGroup.String ([|
+                    BaseToken.Letter (Upper LP)
+                    BaseToken.Letter (Upper LK)
+                    BaseToken.Symbol '_'
+                    BaseToken.Letter (Upper LT)
+                    BaseToken.Letter (Lower LE)
+                    BaseToken.Letter (Lower LS)
+                    BaseToken.Letter (Lower LT) |])
+            |])
             StructuredTokenGroup.Separation [| BaseToken.Separator Whitespace |]
             StructuredTokenGroup.String ([|
                 BaseToken.Letter (Upper LP)
@@ -109,12 +117,14 @@ let ``Classify and group structures for simple CREATE TABLE script`` () =
                 BaseToken.Letter (Upper LY) |])
             StructuredTokenGroup.Separation [| BaseToken.Separator Whitespace |]
             StructuredTokenGroup.Group (Parenthesis, [|
-                StructuredTokenGroup.String ([|
-                    BaseToken.Letter (Upper LI)
-                    BaseToken.Letter (Lower LD) |])
+                StructuredTokenGroup.Group (Bracket, [|
+                    StructuredTokenGroup.String ([|
+                        BaseToken.Letter (Upper LI)
+                        BaseToken.Letter (Lower LD) |])
+                |])
             |])
         |])
     |]
-    let input = "CREATE TABLE dbo.Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
+    let input = "CREATE TABLE [dbo].[Test] ([Id] INT NOT NULL IDENTITY(1, 1), CONSTRAINT [PK_Test] PRIMARY KEY ([Id]))"
     let actual = input |> BaseToken.classify |> BaseToken.group |> TokenGroup.classify |> TokenGroup.group :> StructuredTokenGroup seq
     Assert.Equal(expected, actual)
