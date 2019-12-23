@@ -25,19 +25,17 @@ module TokenGroup =
             match remGroups with
             | [|  |] -> [| |], stackedGroups
             | groups ->
-                let recurse = Array.append stackedGroups >> mapGroups search groups.[1..]
+                let recurse groups = Array.append stackedGroups >> mapGroups search groups
                 match groups.[0] with
-                | TokenGroup.String s -> [| StructuredTokenGroup.String s |] |> recurse
-                | TokenGroup.Separation s -> [| StructuredTokenGroup.Separation s |] |> recurse
-                | TokenGroup.Other s -> [| StructuredTokenGroup.Other s |] |> recurse
+                | TokenGroup.String s -> [| StructuredTokenGroup.String s |] |> recurse groups.[1..]
+                | TokenGroup.Separation s -> [| StructuredTokenGroup.Separation s |] |> recurse groups.[1..]
+                | TokenGroup.Other s -> [| StructuredTokenGroup.Other s |] |> recurse groups.[1..]
                 | TokenGroup.Group (Close g) ->
                     match search with
                     | Some s when s = g -> groups.[1..], stackedGroups
-                    | _ ->  [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |] |> recurse
+                    | _ -> [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |] |> recurse groups.[1..]
                 | TokenGroup.Group (Open g) ->
                     let rem, groups = mapGroups (Some g) groups.[1..] [|  |]
-                    [| StructuredTokenGroup.Group (g, groups) |]
-                    |> Array.append stackedGroups
-                    |> mapGroups search rem
+                    [| StructuredTokenGroup.Group (g, groups) |] |> recurse rem
         mapGroups None groups [|  |] |> snd
         
