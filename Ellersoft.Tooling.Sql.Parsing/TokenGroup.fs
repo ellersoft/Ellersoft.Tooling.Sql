@@ -32,9 +32,7 @@ module TokenGroup =
                 | TokenGroup.Other s -> [| StructuredTokenGroup.Other s |] |> recurse
                 | TokenGroup.Group (Close g) ->
                     match search with
-                    | Some s ->
-                        if g = s then groups.[1..], stackedGroups
-                        else [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |] |> recurse
+                    | Some s when s = g -> groups.[1..], stackedGroups
                     | _ ->  [| StructuredTokenGroup.Other ([| Grouping (Close g) |]) |] |> recurse
                 | TokenGroup.Group (Open g) ->
                     let rem, groups = mapGroups (Some g) groups.[1..] [|  |]
