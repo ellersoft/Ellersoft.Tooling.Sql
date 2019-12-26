@@ -81,7 +81,7 @@ module BaseToken =
         input.ToCharArray() |> Array.map mapCharType
         
     let group (tokens : BaseToken []) =
-        let compatibleToken (a : BaseToken) (b : BaseToken) =
+        let compatibleTokens (a : BaseToken) (b : BaseToken) =
             match a, b with
             | Letter _, Letter _ -> true
             | Number _, Number _ -> true
@@ -99,7 +99,7 @@ module BaseToken =
             match acc with
             | [|  |] -> [| [| token |] |]
             | acc ->
-                if acc.[acc.Length - 1].[0] |> compatibleToken token then
+                if acc.[acc.Length - 1].[0] |> compatibleTokens token then
                     acc.[acc.Length - 1] <- [|token|] |> Array.append (acc.[acc.Length - 1])
                     acc
                 else
