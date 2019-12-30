@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ellersoft.Tooling.Sql.Parsing", "Ellersoft.Tooling.Sql.Parsing\Ellersoft.Tooling.Sql.Parsing.fsproj", "{2EA248E3-0364-4D3E-AC6E-BCFC58BF1E46}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ellersoft.Tooling.Sql.Tests", "Ellersoft.Tooling.Sql.Tests\Ellersoft.Tooling.Sql.Tests.fsproj", "{03A82D3C-2FEA-49AC-A875-52A671A0FEE0}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ellersoft.Tooling.Sql.Parsing.Tests", "Ellersoft.Tooling.Sql.Parsing.Tests\Ellersoft.Tooling.Sql.Parsing.Tests.fsproj", "{03A82D3C-2FEA-49AC-A875-52A671A0FEE0}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ellersoft.Tooling.Sql.Parsing.Objects", "Ellersoft.Tooling.Sql.Parsing.Objects\Ellersoft.Tooling.Sql.Parsing.Objects.fsproj", "{8346BA70-DF2B-462C-9D0B-EDBA13C2AEC8}"
 EndProject
