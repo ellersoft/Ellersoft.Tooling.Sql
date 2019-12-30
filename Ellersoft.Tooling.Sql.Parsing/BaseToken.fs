@@ -77,6 +77,8 @@ module BaseToken =
             | 'X' -> Letter (Upper LX)
             | 'Y' -> Letter (Upper LY)
             | 'Z' -> Letter (Upper LZ)
+            | '\'' -> Special SingleQuote
+            | '"' -> Special DoubleQuote
             | c -> BaseToken.Symbol c
         input.ToCharArray() |> Array.map mapCharType
         
@@ -87,6 +89,7 @@ module BaseToken =
             | Number _, Number _ -> true
             | Symbol _, Symbol _ -> true
             | BaseToken.Separator _, BaseToken.Separator _ -> true
+            | BaseToken.Special a, BaseToken.Special b -> a = b
             | Letter _, Number _ -> true
             | Number _, Letter _ -> true
             | Letter _, Symbol _ -> true

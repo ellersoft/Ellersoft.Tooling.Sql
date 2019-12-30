@@ -9,9 +9,12 @@ type Separator = | Whitespace | Comma | Period
 type Grouping = | Parenthesis | Bracket | Brace
 type OpenCloseGrouping = | Open of Grouping | Close of Grouping
 
+type Special = | SingleQuote | DoubleQuote
+
 type BaseToken =
     | Letter of CasedLetter
     | Separator of Separator
     | Number of Number
     | Grouping of OpenCloseGrouping
+    | Special of Special
     | Symbol of char

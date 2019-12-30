@@ -113,6 +113,48 @@ let ``Classify simple CREATE TABLE script into base character tokens`` () =
     let actual = input |> BaseToken.classify :> BaseToken seq
     Assert.Equal(expected, actual)
 
+[<Fact>]
+let ``Classify simple declaration with single-quote value`` () =
+    let expected = [|
+        BaseToken.Letter (Upper LD)
+        BaseToken.Letter (Upper LE)
+        BaseToken.Letter (Upper LC)
+        BaseToken.Letter (Upper LL)
+        BaseToken.Letter (Upper LA)
+        BaseToken.Letter (Upper LR)
+        BaseToken.Letter (Upper LE)
+        BaseToken.Separator Whitespace
+        BaseToken.Symbol '@'
+        BaseToken.Letter (Upper LT)
+        BaseToken.Letter (Lower LE)
+        BaseToken.Letter (Lower LS)
+        BaseToken.Letter (Lower LT)
+        BaseToken.Separator Whitespace
+        BaseToken.Letter (Upper LV)
+        BaseToken.Letter (Upper LA)
+        BaseToken.Letter (Upper LR)
+        BaseToken.Letter (Upper LC)
+        BaseToken.Letter (Upper LH)
+        BaseToken.Letter (Upper LA)
+        BaseToken.Letter (Upper LR)
+        BaseToken.Grouping (Open Parenthesis)
+        BaseToken.Number N2
+        BaseToken.Number N0
+        BaseToken.Grouping (Close Parenthesis)
+        BaseToken.Separator Whitespace
+        BaseToken.Symbol '='
+        BaseToken.Separator Whitespace
+        BaseToken.Special SingleQuote
+        BaseToken.Letter (Upper LT)
+        BaseToken.Letter (Lower LE)
+        BaseToken.Letter (Lower LS)
+        BaseToken.Letter (Lower LT)
+        BaseToken.Special SingleQuote
+    |]
+    let input = "DECLARE @Test VARCHAR(20) = 'Test'"
+    let actual = input |> BaseToken.classify :> BaseToken seq
+    Assert.Equal(expected, actual)
+
 //[<Fact>]
 //let ``Parse simple CREATE TABLE script (ID, PK Constraint)`` () =
 //    let expected = Script.Create "TABLE Test (Id INT NOT NULL IDENTITY(1, 1), CONSTRAINT PK_Test PRIMARY KEY (Id))"
